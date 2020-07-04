@@ -39,19 +39,19 @@ function checkDB() {
     getAll.onsuccess = () => {
         if (getAll.result.length > 0) {
             fetch('/api/transaction/bulk', {
-                method: "POST", 
+                method: "POST",
                 body: JSON.stringify(getAll.result),
                 headers: {
                     Accept: "application/json, text/plain, */*",
                     "Content-Type": "application/json"
                 }
             }).then(response => response.json())
-            // Delete if successful
-            .then(() => {
-                const transaction = db.transaction(['pending'], 'readWrite');
-                const store = transaction.objectStore('pending');
-                store.clear();
-            })
+                // Delete if successful
+                .then(() => {
+                    const transaction = db.transaction(['pending'], 'readWrite');
+                    const store = transaction.objectStore('pending');
+                    store.clear();
+                })
         }
     }
 }
